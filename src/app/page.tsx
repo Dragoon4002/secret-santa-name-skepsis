@@ -24,12 +24,17 @@ export default function Home() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/users', {
+      const response = await fetch('/api/santa', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, name, password }),
+        body: JSON.stringify({ 
+          email, 
+          name, 
+          password,
+          action: 'create'
+        }),
       });
 
       const data = await response.json();
@@ -54,12 +59,16 @@ export default function Home() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/recheck', {
+      const response = await fetch('/api/santa', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ 
+          email, 
+          password,
+          action: 'check'
+        }),
       });
 
       const data = await response.json();
@@ -86,7 +95,7 @@ export default function Home() {
 
         {!isSubmitted ? (
           <>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={isRechecking ? handleRecheck : handleSubmit} className="space-y-6">
               {errorMessage && (
                 <p className="text-red-500 text-sm bg-red-100 p-3 rounded">{errorMessage}</p>
               )}
@@ -133,7 +142,7 @@ export default function Home() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   className="w-full p-3 border text-black border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                  placeholder="Enter a secure password"
+                  placeholder="Enter your password"
                 />
               </div>
 
@@ -147,7 +156,7 @@ export default function Home() {
                 {isLoading ? (
                   <>
                     <Snowflake className="animate-spin" />
-                    <span>Generating...</span>
+                    <span>Loading...</span>
                   </>
                 ) : (
                   <>
@@ -161,14 +170,21 @@ export default function Home() {
             <div className="mt-4 text-center">
               {!isRechecking ? (
                 <button
-                  onClick={() => setIsRechecking(true)}
+                  onClick={() => {
+                    setIsRechecking(true);
+                    setName('');
+                    setErrorMessage('');
+                  }}
                   className="text-blue-600 hover:text-blue-800 underline"
                 >
                   Already registered? Check your assignment
                 </button>
               ) : (
                 <button
-                  onClick={() => setIsRechecking(false)}
+                  onClick={() => {
+                    setIsRechecking(false);
+                    setErrorMessage('');
+                  }}
                   className="text-blue-600 hover:text-blue-800 underline"
                 >
                   Need to register? Generate new assignment
@@ -198,7 +214,7 @@ export default function Home() {
                     <span>View Image of the Person</span>
                   </a>
                 </div>
-                <p className="text-sm text-green-600">Happy gifting, {name}!</p>
+                <p className="text-sm text-green-600">Happy gifting{name ? `, ${name}` : ''}!</p>
                 <button
                   onClick={() => {
                     setIsSubmitted(false);
@@ -207,6 +223,7 @@ export default function Home() {
                     setPassword('');
                     setName('');
                     setErrorMessage('');
+                    setIsRechecking(false);
                   }}
                   className="text-blue-600 hover:text-blue-800 underline"
                 >

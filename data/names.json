@@ -44,6 +44,12 @@
       "description": "3rd year, Graphics mentor, the Figma queen ruling with style"
     },
     {
+      "name": "Tanuja Chowdhury",
+      "email": "chowdhurytanuja93@gmail.com",
+      "drive_link": "https://drive.google.com/open?id=1Opmx9K3_6rR1axn3hHlGgNa8maKhPue3",
+      "description": "2nd year, Events team, the extrovert who makes things happen"
+    },
+    {
       "name": "Anwesha Das",
       "email": "danwesha488@gmail.com",
       "drive_link": "https://drive.google.com/open?id=1AN3sa546RvALLTsqRGvBX_D_x6KPejIV",
@@ -133,5 +139,5 @@
       "drive_link": "https://drive.google.com/open?id=1Rmv6hmJzRoIEmQuOLyPAY3V5LnvB1vkj",
       "description": "2nd year, Project dev, the mastermind plotting all the big moves"
     }
-  ]
+  ]  
 }
