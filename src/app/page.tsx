@@ -9,6 +9,7 @@ interface SecretSantaData {
 }
 
 export default function Home() {
+  // ... all your state declarations remain the same ...
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -18,6 +19,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [isRechecking, setIsRechecking] = useState(false);
 
+  // ... all your handlers remain the same ...
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
@@ -202,7 +204,7 @@ export default function Home() {
                     {secretSantaData.name}
                   </p>
                   <p className="text-lg text-gray-700 italic">
-                    "{secretSantaData.description}"
+                    &ldquo;{secretSantaData.description}&rdquo;
                   </p>
                   <a
                     href={secretSantaData.driveLink}
