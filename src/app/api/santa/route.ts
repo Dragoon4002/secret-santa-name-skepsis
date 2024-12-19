@@ -41,6 +41,7 @@ export async function POST(request: Request) {
 
     // Connect to MongoDB
     const connection = await connectToMongoDB();
+    console.log(connection);
 
     // Handle assignment creation
     if (action === 'create') {
