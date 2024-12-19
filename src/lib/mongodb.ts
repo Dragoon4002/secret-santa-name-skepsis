@@ -10,7 +10,7 @@ let isConnected = false;
 
 async function connectToMongoDB() {
   if (isConnected) {
-    return;
+    return mongoose.connection;
   }
 
   try {
@@ -21,6 +21,7 @@ async function connectToMongoDB() {
     await mongoose.connect(MONGODB_URI, opts);
     isConnected = true;
     console.log('Connected to MongoDB');
+    return mongoose.connection;
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
     throw error;
